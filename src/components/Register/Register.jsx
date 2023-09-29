@@ -1,3 +1,5 @@
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import auth from "../HeroRegister/firebase/firebase.config";
 
 
 const Register = () => {
@@ -9,6 +11,15 @@ const Register = () => {
         
     
         console.log(email, password);
+
+        // creat user
+        createUserWithEmailAndPassword(auth, email, password)
+        .then(result => {
+            console.log(result.user);
+        })
+        .catch(error=> {
+            console.error(error);
+        })
     }
     // console.log('from submit');
 
