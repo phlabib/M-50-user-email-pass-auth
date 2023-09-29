@@ -13,9 +13,10 @@ const Register = () => {
      e.preventDefault ();
      const email = e.target.email.value;
      const password = e.target.password.value;
+     const accepted = e.target.terms.checked;
         
     
-        console.log(email, password);
+        console.log(email, password, accepted);
         
         // reset error
         setRegisterError('');
@@ -27,6 +28,10 @@ const Register = () => {
         }
         else if(!/[A-Z]/.test(password)){
             setRegisterError('You should have at last One Uppercase Characters')
+            return;
+        }
+        else if (!accepted) {
+            setRegisterError('Please accept our T&C!!')
             return;
         }
 
@@ -49,20 +54,26 @@ const Register = () => {
            <div className="mx-auto md:w-1/2  text-center">
            <h2 className="text-3xl mb-4 text-center">Please Register</h2>
             <form onSubmit={handleRegister}>
-                <input className="border mb-4 w-3/4 py-2 px-4" type="email" name="email" placeholder="E-mail" required/> <br />
-                <input 
-                className="border mb-4 w-3/4 py-2 px-4" 
+                <input className="border mb-4 w-full py-2 px-4" type="email" name="email" placeholder="E-mail" required/> <br />
+             <div className="relative border mb-4">
+             <input 
+                className="border w-full py-2 px-4" 
                 type= {showPassword ? "text" : "password" }
                 name="password"  
                 placeholder="Password"
                 id=""required/>
-                <span onClick={() => setShowPassword(!showPassword)}>
+                <span className="absolute top-3 right-3" onClick={() => setShowPassword(!showPassword)}>
                     {
                         showPassword ? <FaEyeSlash></FaEyeSlash> : <FaEye></FaEye>
                     }
                 </span>
+             </div>
                  <br />
-                <input className="btn btn-secondary mb-4 w-3/4" type="submit" value='Register' />
+                    <input className="mb-4" type="checkbox" name="terms" id="terms" />
+                    <label  htmlFor="terms">Accept <a className="text-blue-500 underline " href="">Terms and Conditions</a></label>
+
+                 <br />
+                <input className="btn btn-secondary mb-4 w-full" type="submit" value='Register' />
             </form>
             {
                 registerError && <p className="text-red-600">{registerError}</p>
