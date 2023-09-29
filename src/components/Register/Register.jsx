@@ -3,11 +3,14 @@
 const Register = () => {
 
     const handleRegister = e => {
-        e.preventDegault ();
-        console.log('object');
-
+     e.preventDefault ();
+     const email = e.target.email.value;
+     const password = e.target.password.value;
+        
+    
+        console.log(email, password);
     }
-
+    // console.log('from submit');
 
     return (
         <div className="">
